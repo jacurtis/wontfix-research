@@ -1,0 +1,7 @@
+# IDEs
+.idea
+.vscode
+
+# Cache
+.cache
+.DS_Store
