@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "wontfix-research"
+version = "0.1.0"
+description = "A study of the effectiveness and implications of the wontfix label on open source repositories"
+authors = ["Alex Curtis <jacurtis@hey.com>"]
+license = "CC BY-ND"
+readme = "README.md"
+packages = [{include = "wontfix_research"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+jupyter = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
