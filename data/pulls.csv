@@ -1,0 +1,487 @@
+id,title,number,repoId,repoName,labels,state,comments,createdAt,updatedAt,closedAt,body,user,userId
+39875675,update,662,29945,android-async-http/android-async-http,['wontfix'],closed,0,2014-08-09T01:46:53Z,2014-08-09T07:18:19Z,2014-08-09T01:47:32Z,,RxLoaron,5568098
+39806965,Use main looper and retry when ssh handshake timeout,661,29945,android-async-http/android-async-http,['wontfix'],closed,0,2014-08-08T09:36:39Z,2019-05-19T00:40:29Z,2014-08-08T09:40:33Z,"Just for personal usage
+",xsoloking,1715733
+34765759,Add clear all headers method to http client,582,29945,android-async-http/android-async-http,"['feature-request', 'wontfix']",closed,4,2014-06-02T11:52:30Z,2019-05-19T00:40:28Z,2014-06-02T11:54:44Z,,larten,1302356
+33226036,JsonHttpResponseHandler bug fix with useSynchronousMode,555,29945,android-async-http/android-async-http,['wontfix'],closed,1,2014-05-10T02:57:31Z,2019-05-19T00:40:27Z,2014-05-29T09:20:35Z,"- JsonHttpResponseHandler was calling on onFailure and onSuccess on a new thread when useSynchronousMode was true.
+
+This is to fix issue #554.
+",jkasten2,645861
+9018830,Added HTTP PATCH support to the library,149,29945,android-async-http/android-async-http,['wontfix'],closed,8,2012-12-05T13:29:23Z,2014-06-13T09:51:18Z,2014-05-03T21:51:47Z,"To implement an API we use I've added HTTP PATCH support to the library. I think this is a welcome addition.
+
+To support HTTP PATCH including the Apache httpclient.jar in your project is required, I stated this in the Readme.md so everybody knows what to do. Note that everything keeps working as it does now when you don't include the extra jar. 
+
+So I think it's a nice addition for people that need it, those who don't need it don't need to include extra stuff.
+
+Hope you will pull this in. If there is anything you need to have changed before you can pull it in, let me know. I'm happy to tweak and change some things around until you're satisfied.
+",mac-cain13,618233
+1736577340,Add annotations which helps code highlight in IntelliJ,4720,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2023-06-01T15:30:17Z,2023-06-01T18:48:23Z,2023-06-01T18:48:13Z,"Motivation: Vert.X has method expecting json-formatted String. IntelliJ Idea IDE has an ability to highlight language syntax for such strings. The goal of this change is to have syntax highlight of Strings pages as inputs to JsonObject.
+
+Note, that this annotation is optional (we don’t need to add real dependency) and it only highlights syntax in the specific IDE.
+
+Please see also https://www.jetbrains.com/help/idea/using-language-injections.html#inject_language",imanushin,4425474
+1354504993,Add default implementation for new periodic timer methods in Vertx,4467,49010,eclipse-vertx/vert.x,"['wontfix', 'enhancement']",closed,2,2022-08-29T15:38:46Z,2022-09-19T14:18:57Z,2022-08-30T08:57:07Z,"Avoids breaking implementations that do not have the method yet.
+
+Follows-up on #4450 ",tsegismont,1500598
+1278184375,[Draft] Ensure inner type when create JsonXxx,4415,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2022-06-21T09:44:46Z,2022-06-22T09:49:34Z,2022-06-22T08:29:47Z,"Motivation:
+
+When I work with https://github.com/eclipse-vertx/vert.x/pull/4401 and do some research and test, I found problem when I create JsonObject and JsonArray with `ImmutableCollections`.
+
+Take  the below example:
+
+```
+  @Test
+  void testMapOf(Vertx vertx, VertxTestContext testContext) {
+    Map<String, Object> map = Map.of(""x"", 1);
+    JsonObject obj = new JsonObject(map);
+    logger.info(""Run testMapOf with JsonObject "" + obj);
+
+    try {
+      obj.put(""y"", ""222"");
+      testContext.failNow(""Should not reach here"");
+      return;
+    } catch (Throwable t) {
+      logger.info(""Run testMapOf with JsonObject updating error"" + t);
+    }
+
+    testContext.completeNow();
+  }
+```
+
+When I create JsonObject with a map created by Map.of, a immutable map, the JsonObject instance I created cannot updated again, this feels strange.
+
+This pull request is a draft and look forward to further discussion for a correct solution if this is a problem, and I will make a reasonable change after that.
+If this is expected, I will close it.",liuchong,236058
+1222364379,Enable using Supplier functions in sequential coordination of Futures,4351,49010,eclipse-vertx/vert.x,['wontfix'],closed,3,2022-05-02T01:10:09Z,2022-05-13T09:00:41Z,2022-05-09T10:43:35Z,"I sometimes find myself writing code like this:
+
+```java
+Future<Void> f = returnSomeVoidFuture();
+f.compose(unused -> returnAnotherFuture());
+```
+
+The problem here is that when the unary `Function` argument is invoked, `unused` has the value `null`, so programmers must be careful not to reference it. To mitigate this danger, I have been using a naming convention for such unused parameters, but I think a better solution is to allow passing a nullary `Supplier` function instead:
+
+```java
+f.compose(() -> returnAnotherFuture());
+```
+
+This changeset adds support for that syntax, and similarly for `Future::eventually` (which has the same problem).
+
+P.S. I think it would be nice if `Future::onComplete` and `Future::onSuccess` also supported this syntax, but that change seems much more difficult to implement in a backwards-compatible way.",markmatney,6744471
+1216122539,Update BareCommand to support argument processor on cli,4346,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2022-04-26T15:22:38Z,2022-05-09T09:21:11Z,2022-05-09T09:21:03Z,"New PR base from https://github.com/eclipse-vertx/vert.x/pull/4340
+
+This will allow to each vertx-conf-{extension} to define another CliJsonProcessor(if is needed) to allow for example work with YAML files
+",riojano0,13397332
+1210057754,"Support yaml files on the use of ""-conf""",4340,49010,eclipse-vertx/vert.x,['wontfix'],closed,5,2022-04-20T18:26:26Z,2022-05-02T08:28:22Z,2022-04-26T08:30:26Z,"Motivation:
+
+Try to provide support to the use of the flag ""-conf"" with YAML files
+
+Eg: 
+```java -jar target/my-project.jar -conf target/config.yaml```
+
+The approach is similar to the one used on io.vertx.config.yaml.YamlProcessor",riojano0,13397332
+1014891625,Message codec inheritance,4117,49010,eclipse-vertx/vert.x,"['wontfix', 'enhancement']",closed,4,2021-10-04T08:36:46Z,2022-05-06T16:11:29Z,2022-05-06T16:11:22Z,,vietj,225674
+1013724402,Allow to register default codecs that can handle sub-types,4113,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2021-10-01T20:12:25Z,2022-05-06T16:34:11Z,2022-05-06T16:34:11Z,"Implements #4087. Imagine having multiple ""Ducks"" that you want to send via the wire:
+
+- `GreatDuck`
+- `SmallDuck`
+- `DuckyMcDuck`
+
+All ducks implement the `Duck` interface and a `toJson` method.
+
+This change allows to implement one `DuckMessageCodec` which can handle any duck by calling the `toJson` method on the object.",kristian,247497
+950530582,backport from master of disabling HaManager (https://github.com/eclipse-vertx/vert.x/pull/4014),4030,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2021-07-22T10:49:08Z,2021-07-22T13:34:17Z,2021-07-22T13:34:17Z,"Motivation:
+
+backport https://github.com/eclipse-vertx/vert.x/pull/4014 to 4.1 in case there will be a 4.1.3
+@tsegismont 
+
+Conformance:
+
+Your commits should be signed and you should have signed the Eclipse Contributor Agreement as explained in https://github.com/eclipse/vert.x/blob/master/CONTRIBUTING.md
+Please also make sure you adhere to the code style guidelines: https://github.com/vert-x3/wiki/wiki/Vert.x-code-style-guidelines
+",DemonicTutor,18700075
+897682303,Resolve #3941,3942,49010,eclipse-vertx/vert.x,['wontfix'],closed,15,2021-05-21T05:10:02Z,2021-06-23T13:25:02Z,2021-06-23T13:24:51Z,"Resolve #3941 
+
+Conformance:
+
+Your commits should be signed and you should have signed the Eclipse Contributor Agreement as explained in https://github.com/eclipse/vert.x/blob/master/CONTRIBUTING.md
+Please also make sure you adhere to the code style guidelines: https://github.com/vert-x3/wiki/wiki/Vert.x-code-style-guidelines
+",zero88,10863525
+867662431,Local codecs,3903,49010,eclipse-vertx/vert.x,['wontfix'],closed,2,2021-04-26T12:43:47Z,2022-05-09T07:14:37Z,2022-05-06T16:08:23Z,"Fix #3378
+
+This PR adds the concept of local codecs, which is a way to simplify sending copyable and immutable data through the local event bus.",slinkydeveloper,6706544
+743863566,Minor update of Serializer for readability,3641,49010,eclipse-vertx/vert.x,['wontfix'],closed,2,2020-11-16T14:06:15Z,2021-10-21T07:13:08Z,2021-10-21T07:12:27Z,"When a task is complete, we need to:
+
+- complete the original promise (provided by the event bus class)
+- make sure task processing continues by polling the queue and checking pending tasks
+
+Instead of implementing this behavior in a single method (SerializerQueue#add), we can separate the concerns in other methods for clarity.",tsegismont,1500598
+562257182,Implementation of a generic message codec.,3280,49010,eclipse-vertx/vert.x,['wontfix'],closed,6,2020-02-09T23:19:15Z,2022-05-06T16:13:27Z,2022-05-06T16:13:26Z,"Signed-off-by: Rodrigo Salado Anaya <rodrigo.salado.anaya@gmail.com>
+
+Motivation:
+
+Provide a generic way to serialize POJOs without the need to implement your own.
+
+Support must be enabled to use the generic codec.
+E.g.
+```java
+EventBus eventBus = vertx.eventBus().enableGenericCodec();
+POJO ping = new POJO(""Ping..."");
+
+eventBus.<POJO>consumer(ADDRESS, message -> {
+  POJO pong = new POJO(""Pong..."");
+  message.reply(pong);
+});
+
+eventBus.<POJO>request(ADDRESS, ping, reply -> {
+  POJO pong = reply.result().body();
+});
+```
+
+See also #3279 
+",rodrigoSaladoAnaya,956624
+325080557,Add VertxOption to specify worker pool queue capacity,2469,49010,eclipse-vertx/vert.x,['wontfix'],closed,19,2018-05-21T22:31:30Z,2018-09-14T20:49:38Z,2018-05-30T16:08:01Z,"Add the ability to set the maximum capacity for the worker pool queue at
+which point trying to enqueue additional tasks when its full will result
+in a RejectedExecutionException
+
+Previously the capacity of the queue was Integer.MAX_VALUE (unbounded)
+which can result in a death-spiral for systems (i.e. http services) that
+are processing more requests than they can handle.
+
+For instance, as work tasks begin to queue for the workerPool, clients
+that have yet to be serviced start retrying their operations. The queue
+then continues to grow with clients continuing to retry their operation.
+Death spiral.
+
+Fixes #2465 
+
+Signed-off-by: Farid Zakaria <farid.m.zakaria@gmail.com>",fzakaria,605070
+287456958,Add a close method to AsyncMultiMap,2270,49010,eclipse-vertx/vert.x,['wontfix'],closed,11,2018-01-10T14:42:01Z,2018-09-28T07:56:07Z,2018-09-28T07:52:07Z,"This allows cluster managers to free resources they use to maintain the state.
+
+Needed for vert-x3/issues#316",tsegismont,1500598
+125789217,Added possibility to register custom jackson modules in Json utility class,1274,49010,eclipse-vertx/vert.x,['wontfix'],closed,6,2016-01-09T23:56:45Z,2018-09-14T20:48:33Z,2018-04-16T08:44:46Z,"Adds the registerModule method to the Json class, so decoding/encoding can be extended with custom serializers/deserializers.
+",pjozsef,9980358
+39875675,update,662,29945,android-async-http/android-async-http,['wontfix'],closed,0,2014-08-09T01:46:53Z,2014-08-09T07:18:19Z,2014-08-09T01:47:32Z,,RxLoaron,5568098
+39806965,Use main looper and retry when ssh handshake timeout,661,29945,android-async-http/android-async-http,['wontfix'],closed,0,2014-08-08T09:36:39Z,2019-05-19T00:40:29Z,2014-08-08T09:40:33Z,"Just for personal usage
+",xsoloking,1715733
+34765759,Add clear all headers method to http client,582,29945,android-async-http/android-async-http,"['feature-request', 'wontfix']",closed,4,2014-06-02T11:52:30Z,2019-05-19T00:40:28Z,2014-06-02T11:54:44Z,,larten,1302356
+33226036,JsonHttpResponseHandler bug fix with useSynchronousMode,555,29945,android-async-http/android-async-http,['wontfix'],closed,1,2014-05-10T02:57:31Z,2019-05-19T00:40:27Z,2014-05-29T09:20:35Z,"- JsonHttpResponseHandler was calling on onFailure and onSuccess on a new thread when useSynchronousMode was true.
+
+This is to fix issue #554.
+",jkasten2,645861
+9018830,Added HTTP PATCH support to the library,149,29945,android-async-http/android-async-http,['wontfix'],closed,8,2012-12-05T13:29:23Z,2014-06-13T09:51:18Z,2014-05-03T21:51:47Z,"To implement an API we use I've added HTTP PATCH support to the library. I think this is a welcome addition.
+
+To support HTTP PATCH including the Apache httpclient.jar in your project is required, I stated this in the Readme.md so everybody knows what to do. Note that everything keeps working as it does now when you don't include the extra jar. 
+
+So I think it's a nice addition for people that need it, those who don't need it don't need to include extra stuff.
+
+Hope you will pull this in. If there is anything you need to have changed before you can pull it in, let me know. I'm happy to tweak and change some things around until you're satisfied.
+",mac-cain13,618233
+1736577340,Add annotations which helps code highlight in IntelliJ,4720,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2023-06-01T15:30:17Z,2023-06-01T18:48:23Z,2023-06-01T18:48:13Z,"Motivation: Vert.X has method expecting json-formatted String. IntelliJ Idea IDE has an ability to highlight language syntax for such strings. The goal of this change is to have syntax highlight of Strings pages as inputs to JsonObject.
+
+Note, that this annotation is optional (we don’t need to add real dependency) and it only highlights syntax in the specific IDE.
+
+Please see also https://www.jetbrains.com/help/idea/using-language-injections.html#inject_language",imanushin,4425474
+1354504993,Add default implementation for new periodic timer methods in Vertx,4467,49010,eclipse-vertx/vert.x,"['wontfix', 'enhancement']",closed,2,2022-08-29T15:38:46Z,2022-09-19T14:18:57Z,2022-08-30T08:57:07Z,"Avoids breaking implementations that do not have the method yet.
+
+Follows-up on #4450 ",tsegismont,1500598
+1278184375,[Draft] Ensure inner type when create JsonXxx,4415,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2022-06-21T09:44:46Z,2022-06-22T09:49:34Z,2022-06-22T08:29:47Z,"Motivation:
+
+When I work with https://github.com/eclipse-vertx/vert.x/pull/4401 and do some research and test, I found problem when I create JsonObject and JsonArray with `ImmutableCollections`.
+
+Take  the below example:
+
+```
+  @Test
+  void testMapOf(Vertx vertx, VertxTestContext testContext) {
+    Map<String, Object> map = Map.of(""x"", 1);
+    JsonObject obj = new JsonObject(map);
+    logger.info(""Run testMapOf with JsonObject "" + obj);
+
+    try {
+      obj.put(""y"", ""222"");
+      testContext.failNow(""Should not reach here"");
+      return;
+    } catch (Throwable t) {
+      logger.info(""Run testMapOf with JsonObject updating error"" + t);
+    }
+
+    testContext.completeNow();
+  }
+```
+
+When I create JsonObject with a map created by Map.of, a immutable map, the JsonObject instance I created cannot updated again, this feels strange.
+
+This pull request is a draft and look forward to further discussion for a correct solution if this is a problem, and I will make a reasonable change after that.
+If this is expected, I will close it.",liuchong,236058
+1222364379,Enable using Supplier functions in sequential coordination of Futures,4351,49010,eclipse-vertx/vert.x,['wontfix'],closed,3,2022-05-02T01:10:09Z,2022-05-13T09:00:41Z,2022-05-09T10:43:35Z,"I sometimes find myself writing code like this:
+
+```java
+Future<Void> f = returnSomeVoidFuture();
+f.compose(unused -> returnAnotherFuture());
+```
+
+The problem here is that when the unary `Function` argument is invoked, `unused` has the value `null`, so programmers must be careful not to reference it. To mitigate this danger, I have been using a naming convention for such unused parameters, but I think a better solution is to allow passing a nullary `Supplier` function instead:
+
+```java
+f.compose(() -> returnAnotherFuture());
+```
+
+This changeset adds support for that syntax, and similarly for `Future::eventually` (which has the same problem).
+
+P.S. I think it would be nice if `Future::onComplete` and `Future::onSuccess` also supported this syntax, but that change seems much more difficult to implement in a backwards-compatible way.",markmatney,6744471
+1216122539,Update BareCommand to support argument processor on cli,4346,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2022-04-26T15:22:38Z,2022-05-09T09:21:11Z,2022-05-09T09:21:03Z,"New PR base from https://github.com/eclipse-vertx/vert.x/pull/4340
+
+This will allow to each vertx-conf-{extension} to define another CliJsonProcessor(if is needed) to allow for example work with YAML files
+",riojano0,13397332
+1210057754,"Support yaml files on the use of ""-conf""",4340,49010,eclipse-vertx/vert.x,['wontfix'],closed,5,2022-04-20T18:26:26Z,2022-05-02T08:28:22Z,2022-04-26T08:30:26Z,"Motivation:
+
+Try to provide support to the use of the flag ""-conf"" with YAML files
+
+Eg: 
+```java -jar target/my-project.jar -conf target/config.yaml```
+
+The approach is similar to the one used on io.vertx.config.yaml.YamlProcessor",riojano0,13397332
+1014891625,Message codec inheritance,4117,49010,eclipse-vertx/vert.x,"['wontfix', 'enhancement']",closed,4,2021-10-04T08:36:46Z,2022-05-06T16:11:29Z,2022-05-06T16:11:22Z,,vietj,225674
+1013724402,Allow to register default codecs that can handle sub-types,4113,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2021-10-01T20:12:25Z,2022-05-06T16:34:11Z,2022-05-06T16:34:11Z,"Implements #4087. Imagine having multiple ""Ducks"" that you want to send via the wire:
+
+- `GreatDuck`
+- `SmallDuck`
+- `DuckyMcDuck`
+
+All ducks implement the `Duck` interface and a `toJson` method.
+
+This change allows to implement one `DuckMessageCodec` which can handle any duck by calling the `toJson` method on the object.",kristian,247497
+950530582,backport from master of disabling HaManager (https://github.com/eclipse-vertx/vert.x/pull/4014),4030,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2021-07-22T10:49:08Z,2021-07-22T13:34:17Z,2021-07-22T13:34:17Z,"Motivation:
+
+backport https://github.com/eclipse-vertx/vert.x/pull/4014 to 4.1 in case there will be a 4.1.3
+@tsegismont 
+
+Conformance:
+
+Your commits should be signed and you should have signed the Eclipse Contributor Agreement as explained in https://github.com/eclipse/vert.x/blob/master/CONTRIBUTING.md
+Please also make sure you adhere to the code style guidelines: https://github.com/vert-x3/wiki/wiki/Vert.x-code-style-guidelines
+",DemonicTutor,18700075
+897682303,Resolve #3941,3942,49010,eclipse-vertx/vert.x,['wontfix'],closed,15,2021-05-21T05:10:02Z,2021-06-23T13:25:02Z,2021-06-23T13:24:51Z,"Resolve #3941 
+
+Conformance:
+
+Your commits should be signed and you should have signed the Eclipse Contributor Agreement as explained in https://github.com/eclipse/vert.x/blob/master/CONTRIBUTING.md
+Please also make sure you adhere to the code style guidelines: https://github.com/vert-x3/wiki/wiki/Vert.x-code-style-guidelines
+",zero88,10863525
+867662431,Local codecs,3903,49010,eclipse-vertx/vert.x,['wontfix'],closed,2,2021-04-26T12:43:47Z,2022-05-09T07:14:37Z,2022-05-06T16:08:23Z,"Fix #3378
+
+This PR adds the concept of local codecs, which is a way to simplify sending copyable and immutable data through the local event bus.",slinkydeveloper,6706544
+743863566,Minor update of Serializer for readability,3641,49010,eclipse-vertx/vert.x,['wontfix'],closed,2,2020-11-16T14:06:15Z,2021-10-21T07:13:08Z,2021-10-21T07:12:27Z,"When a task is complete, we need to:
+
+- complete the original promise (provided by the event bus class)
+- make sure task processing continues by polling the queue and checking pending tasks
+
+Instead of implementing this behavior in a single method (SerializerQueue#add), we can separate the concerns in other methods for clarity.",tsegismont,1500598
+562257182,Implementation of a generic message codec.,3280,49010,eclipse-vertx/vert.x,['wontfix'],closed,6,2020-02-09T23:19:15Z,2022-05-06T16:13:27Z,2022-05-06T16:13:26Z,"Signed-off-by: Rodrigo Salado Anaya <rodrigo.salado.anaya@gmail.com>
+
+Motivation:
+
+Provide a generic way to serialize POJOs without the need to implement your own.
+
+Support must be enabled to use the generic codec.
+E.g.
+```java
+EventBus eventBus = vertx.eventBus().enableGenericCodec();
+POJO ping = new POJO(""Ping..."");
+
+eventBus.<POJO>consumer(ADDRESS, message -> {
+  POJO pong = new POJO(""Pong..."");
+  message.reply(pong);
+});
+
+eventBus.<POJO>request(ADDRESS, ping, reply -> {
+  POJO pong = reply.result().body();
+});
+```
+
+See also #3279 
+",rodrigoSaladoAnaya,956624
+325080557,Add VertxOption to specify worker pool queue capacity,2469,49010,eclipse-vertx/vert.x,['wontfix'],closed,19,2018-05-21T22:31:30Z,2018-09-14T20:49:38Z,2018-05-30T16:08:01Z,"Add the ability to set the maximum capacity for the worker pool queue at
+which point trying to enqueue additional tasks when its full will result
+in a RejectedExecutionException
+
+Previously the capacity of the queue was Integer.MAX_VALUE (unbounded)
+which can result in a death-spiral for systems (i.e. http services) that
+are processing more requests than they can handle.
+
+For instance, as work tasks begin to queue for the workerPool, clients
+that have yet to be serviced start retrying their operations. The queue
+then continues to grow with clients continuing to retry their operation.
+Death spiral.
+
+Fixes #2465 
+
+Signed-off-by: Farid Zakaria <farid.m.zakaria@gmail.com>",fzakaria,605070
+287456958,Add a close method to AsyncMultiMap,2270,49010,eclipse-vertx/vert.x,['wontfix'],closed,11,2018-01-10T14:42:01Z,2018-09-28T07:56:07Z,2018-09-28T07:52:07Z,"This allows cluster managers to free resources they use to maintain the state.
+
+Needed for vert-x3/issues#316",tsegismont,1500598
+125789217,Added possibility to register custom jackson modules in Json utility class,1274,49010,eclipse-vertx/vert.x,['wontfix'],closed,6,2016-01-09T23:56:45Z,2018-09-14T20:48:33Z,2018-04-16T08:44:46Z,"Adds the registerModule method to the Json class, so decoding/encoding can be extended with custom serializers/deserializers.
+",pjozsef,9980358
+39875675,update,662,29945,android-async-http/android-async-http,['wontfix'],closed,0,2014-08-09T01:46:53Z,2014-08-09T07:18:19Z,2014-08-09T01:47:32Z,,RxLoaron,5568098
+39806965,Use main looper and retry when ssh handshake timeout,661,29945,android-async-http/android-async-http,['wontfix'],closed,0,2014-08-08T09:36:39Z,2019-05-19T00:40:29Z,2014-08-08T09:40:33Z,"Just for personal usage
+",xsoloking,1715733
+34765759,Add clear all headers method to http client,582,29945,android-async-http/android-async-http,"['feature-request', 'wontfix']",closed,4,2014-06-02T11:52:30Z,2019-05-19T00:40:28Z,2014-06-02T11:54:44Z,,larten,1302356
+33226036,JsonHttpResponseHandler bug fix with useSynchronousMode,555,29945,android-async-http/android-async-http,['wontfix'],closed,1,2014-05-10T02:57:31Z,2019-05-19T00:40:27Z,2014-05-29T09:20:35Z,"- JsonHttpResponseHandler was calling on onFailure and onSuccess on a new thread when useSynchronousMode was true.
+
+This is to fix issue #554.
+",jkasten2,645861
+9018830,Added HTTP PATCH support to the library,149,29945,android-async-http/android-async-http,['wontfix'],closed,8,2012-12-05T13:29:23Z,2014-06-13T09:51:18Z,2014-05-03T21:51:47Z,"To implement an API we use I've added HTTP PATCH support to the library. I think this is a welcome addition.
+
+To support HTTP PATCH including the Apache httpclient.jar in your project is required, I stated this in the Readme.md so everybody knows what to do. Note that everything keeps working as it does now when you don't include the extra jar. 
+
+So I think it's a nice addition for people that need it, those who don't need it don't need to include extra stuff.
+
+Hope you will pull this in. If there is anything you need to have changed before you can pull it in, let me know. I'm happy to tweak and change some things around until you're satisfied.
+",mac-cain13,618233
+1736577340,Add annotations which helps code highlight in IntelliJ,4720,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2023-06-01T15:30:17Z,2023-06-01T18:48:23Z,2023-06-01T18:48:13Z,"Motivation: Vert.X has method expecting json-formatted String. IntelliJ Idea IDE has an ability to highlight language syntax for such strings. The goal of this change is to have syntax highlight of Strings pages as inputs to JsonObject.
+
+Note, that this annotation is optional (we don’t need to add real dependency) and it only highlights syntax in the specific IDE.
+
+Please see also https://www.jetbrains.com/help/idea/using-language-injections.html#inject_language",imanushin,4425474
+1354504993,Add default implementation for new periodic timer methods in Vertx,4467,49010,eclipse-vertx/vert.x,"['wontfix', 'enhancement']",closed,2,2022-08-29T15:38:46Z,2022-09-19T14:18:57Z,2022-08-30T08:57:07Z,"Avoids breaking implementations that do not have the method yet.
+
+Follows-up on #4450 ",tsegismont,1500598
+1278184375,[Draft] Ensure inner type when create JsonXxx,4415,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2022-06-21T09:44:46Z,2022-06-22T09:49:34Z,2022-06-22T08:29:47Z,"Motivation:
+
+When I work with https://github.com/eclipse-vertx/vert.x/pull/4401 and do some research and test, I found problem when I create JsonObject and JsonArray with `ImmutableCollections`.
+
+Take  the below example:
+
+```
+  @Test
+  void testMapOf(Vertx vertx, VertxTestContext testContext) {
+    Map<String, Object> map = Map.of(""x"", 1);
+    JsonObject obj = new JsonObject(map);
+    logger.info(""Run testMapOf with JsonObject "" + obj);
+
+    try {
+      obj.put(""y"", ""222"");
+      testContext.failNow(""Should not reach here"");
+      return;
+    } catch (Throwable t) {
+      logger.info(""Run testMapOf with JsonObject updating error"" + t);
+    }
+
+    testContext.completeNow();
+  }
+```
+
+When I create JsonObject with a map created by Map.of, a immutable map, the JsonObject instance I created cannot updated again, this feels strange.
+
+This pull request is a draft and look forward to further discussion for a correct solution if this is a problem, and I will make a reasonable change after that.
+If this is expected, I will close it.",liuchong,236058
+1222364379,Enable using Supplier functions in sequential coordination of Futures,4351,49010,eclipse-vertx/vert.x,['wontfix'],closed,3,2022-05-02T01:10:09Z,2022-05-13T09:00:41Z,2022-05-09T10:43:35Z,"I sometimes find myself writing code like this:
+
+```java
+Future<Void> f = returnSomeVoidFuture();
+f.compose(unused -> returnAnotherFuture());
+```
+
+The problem here is that when the unary `Function` argument is invoked, `unused` has the value `null`, so programmers must be careful not to reference it. To mitigate this danger, I have been using a naming convention for such unused parameters, but I think a better solution is to allow passing a nullary `Supplier` function instead:
+
+```java
+f.compose(() -> returnAnotherFuture());
+```
+
+This changeset adds support for that syntax, and similarly for `Future::eventually` (which has the same problem).
+
+P.S. I think it would be nice if `Future::onComplete` and `Future::onSuccess` also supported this syntax, but that change seems much more difficult to implement in a backwards-compatible way.",markmatney,6744471
+1216122539,Update BareCommand to support argument processor on cli,4346,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2022-04-26T15:22:38Z,2022-05-09T09:21:11Z,2022-05-09T09:21:03Z,"New PR base from https://github.com/eclipse-vertx/vert.x/pull/4340
+
+This will allow to each vertx-conf-{extension} to define another CliJsonProcessor(if is needed) to allow for example work with YAML files
+",riojano0,13397332
+1210057754,"Support yaml files on the use of ""-conf""",4340,49010,eclipse-vertx/vert.x,['wontfix'],closed,5,2022-04-20T18:26:26Z,2022-05-02T08:28:22Z,2022-04-26T08:30:26Z,"Motivation:
+
+Try to provide support to the use of the flag ""-conf"" with YAML files
+
+Eg: 
+```java -jar target/my-project.jar -conf target/config.yaml```
+
+The approach is similar to the one used on io.vertx.config.yaml.YamlProcessor",riojano0,13397332
+1014891625,Message codec inheritance,4117,49010,eclipse-vertx/vert.x,"['wontfix', 'enhancement']",closed,4,2021-10-04T08:36:46Z,2022-05-06T16:11:29Z,2022-05-06T16:11:22Z,,vietj,225674
+1013724402,Allow to register default codecs that can handle sub-types,4113,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2021-10-01T20:12:25Z,2022-05-06T16:34:11Z,2022-05-06T16:34:11Z,"Implements #4087. Imagine having multiple ""Ducks"" that you want to send via the wire:
+
+- `GreatDuck`
+- `SmallDuck`
+- `DuckyMcDuck`
+
+All ducks implement the `Duck` interface and a `toJson` method.
+
+This change allows to implement one `DuckMessageCodec` which can handle any duck by calling the `toJson` method on the object.",kristian,247497
+950530582,backport from master of disabling HaManager (https://github.com/eclipse-vertx/vert.x/pull/4014),4030,49010,eclipse-vertx/vert.x,['wontfix'],closed,1,2021-07-22T10:49:08Z,2021-07-22T13:34:17Z,2021-07-22T13:34:17Z,"Motivation:
+
+backport https://github.com/eclipse-vertx/vert.x/pull/4014 to 4.1 in case there will be a 4.1.3
+@tsegismont 
+
+Conformance:
+
+Your commits should be signed and you should have signed the Eclipse Contributor Agreement as explained in https://github.com/eclipse/vert.x/blob/master/CONTRIBUTING.md
+Please also make sure you adhere to the code style guidelines: https://github.com/vert-x3/wiki/wiki/Vert.x-code-style-guidelines
+",DemonicTutor,18700075
+897682303,Resolve #3941,3942,49010,eclipse-vertx/vert.x,['wontfix'],closed,15,2021-05-21T05:10:02Z,2021-06-23T13:25:02Z,2021-06-23T13:24:51Z,"Resolve #3941 
+
+Conformance:
+
+Your commits should be signed and you should have signed the Eclipse Contributor Agreement as explained in https://github.com/eclipse/vert.x/blob/master/CONTRIBUTING.md
+Please also make sure you adhere to the code style guidelines: https://github.com/vert-x3/wiki/wiki/Vert.x-code-style-guidelines
+",zero88,10863525
+867662431,Local codecs,3903,49010,eclipse-vertx/vert.x,['wontfix'],closed,2,2021-04-26T12:43:47Z,2022-05-09T07:14:37Z,2022-05-06T16:08:23Z,"Fix #3378
+
+This PR adds the concept of local codecs, which is a way to simplify sending copyable and immutable data through the local event bus.",slinkydeveloper,6706544
+743863566,Minor update of Serializer for readability,3641,49010,eclipse-vertx/vert.x,['wontfix'],closed,2,2020-11-16T14:06:15Z,2021-10-21T07:13:08Z,2021-10-21T07:12:27Z,"When a task is complete, we need to:
+
+- complete the original promise (provided by the event bus class)
+- make sure task processing continues by polling the queue and checking pending tasks
+
+Instead of implementing this behavior in a single method (SerializerQueue#add), we can separate the concerns in other methods for clarity.",tsegismont,1500598
+562257182,Implementation of a generic message codec.,3280,49010,eclipse-vertx/vert.x,['wontfix'],closed,6,2020-02-09T23:19:15Z,2022-05-06T16:13:27Z,2022-05-06T16:13:26Z,"Signed-off-by: Rodrigo Salado Anaya <rodrigo.salado.anaya@gmail.com>
+
+Motivation:
+
+Provide a generic way to serialize POJOs without the need to implement your own.
+
+Support must be enabled to use the generic codec.
+E.g.
+```java
+EventBus eventBus = vertx.eventBus().enableGenericCodec();
+POJO ping = new POJO(""Ping..."");
+
+eventBus.<POJO>consumer(ADDRESS, message -> {
+  POJO pong = new POJO(""Pong..."");
+  message.reply(pong);
+});
+
+eventBus.<POJO>request(ADDRESS, ping, reply -> {
+  POJO pong = reply.result().body();
+});
+```
+
+See also #3279 
+",rodrigoSaladoAnaya,956624
+325080557,Add VertxOption to specify worker pool queue capacity,2469,49010,eclipse-vertx/vert.x,['wontfix'],closed,19,2018-05-21T22:31:30Z,2018-09-14T20:49:38Z,2018-05-30T16:08:01Z,"Add the ability to set the maximum capacity for the worker pool queue at
+which point trying to enqueue additional tasks when its full will result
+in a RejectedExecutionException
+
+Previously the capacity of the queue was Integer.MAX_VALUE (unbounded)
+which can result in a death-spiral for systems (i.e. http services) that
+are processing more requests than they can handle.
+
+For instance, as work tasks begin to queue for the workerPool, clients
+that have yet to be serviced start retrying their operations. The queue
+then continues to grow with clients continuing to retry their operation.
+Death spiral.
+
+Fixes #2465 
+
+Signed-off-by: Farid Zakaria <farid.m.zakaria@gmail.com>",fzakaria,605070
+287456958,Add a close method to AsyncMultiMap,2270,49010,eclipse-vertx/vert.x,['wontfix'],closed,11,2018-01-10T14:42:01Z,2018-09-28T07:56:07Z,2018-09-28T07:52:07Z,"This allows cluster managers to free resources they use to maintain the state.
+
+Needed for vert-x3/issues#316",tsegismont,1500598
+125789217,Added possibility to register custom jackson modules in Json utility class,1274,49010,eclipse-vertx/vert.x,['wontfix'],closed,6,2016-01-09T23:56:45Z,2018-09-14T20:48:33Z,2018-04-16T08:44:46Z,"Adds the registerModule method to the Json class, so decoding/encoding can be extended with custom serializers/deserializers.
+",pjozsef,9980358
