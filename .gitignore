@@ -5,3 +5,5 @@
 # Cache
 .cache
 .DS_Store
+
+*-checkpoint.ipynb
