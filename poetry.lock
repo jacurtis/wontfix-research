@@ -1997,6 +1997,16 @@ packaging = "*"
 test = ["pytest (>=6,!=7.0.0,!=7.0.1)", "pytest-cov (>=3.0.0)", "pytest-qt"]
 
 [[package]]
+name = "ratelimit"
+version = "2.2.1"
+description = "API rate limit decorator"
+optional = false
+python-versions = "*"
+files = [
+    {file = "ratelimit-2.2.1.tar.gz", hash = "sha256:af8a9b64b821529aca09ebaf6d8d279100d766f19e90b5059ac6a718ca6dee42"},
+]
+
+[[package]]
 name = "referencing"
 version = "0.34.0"
 description = "JSON Referencing + Python"
@@ -2528,4 +2538,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "0138b34c67960196a33831f9ea5fe48ea4d6e133ebea02e6a55e5a46b2f777c5"
+content-hash = "8cc2c6728bb8aa085d30476140e09fee3b7725cd4391d431a8bc276974c05e41"
