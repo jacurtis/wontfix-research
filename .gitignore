@@ -1,6 +1,8 @@
 # Data Directory
 # Grab this data from the google drive, in Readme.md instead
 data/
+!data/.gitkeep
+backup/
 
 # IDEs
 .idea
